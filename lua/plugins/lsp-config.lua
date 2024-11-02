@@ -20,7 +20,7 @@ return {
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 			local lspconfig = require("lspconfig")
-              
+
             lspconfig.ts_ls.setup({
 				capabilities = capabilities,
 			})
@@ -40,6 +40,18 @@ return {
             lspconfig.rust_analyzer.setup({
 				capabilities = capabilities,
 			})
+
+            lspconfig.dockerls.setup({
+              settings = {
+                docker = {
+                  languageserver = {
+                    formatter = {
+                      ignoreMultilineInstructions = true,
+                    },
+                  },
+                }
+              }
+            })
 
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
 			vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
